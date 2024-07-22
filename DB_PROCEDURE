@@ -1,0 +1,28 @@
+CRIANDO UM BANCO DE DADOS SALES:
+
+CREATE TABLE sales (
+    sale_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    quantity INT,
+    sale_date DATE
+);
+
+
+CONSTRUINDO A PROCEDURE
+
+DELIMITER //
+
+CREATE PROCEDURE daily_sales_report()
+BEGIN
+    SELECT
+        sale_date,
+        SUM(quantity) AS total_quantity
+    FROM
+        sales
+    GROUP BY
+        sale_date
+    ORDER BY
+        sale_date;
+END //
+
+DELIMITER ;
